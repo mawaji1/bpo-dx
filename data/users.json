@@ -1,0 +1,67 @@
+[
+  {
+    "id": "user_admin",
+    "email": "admin@elm.sa",
+    "name": "مدير النظام",
+    "password": "admin@mawaji@2025",
+    "role": "admin",
+    "department": null,
+    "assignedProjects": [],
+    "mustChangePassword": false
+  },
+  {
+    "id": "user_be_001",
+    "email": "lalmarri@elm.sa",
+    "name": "لمى المري",
+    "password": "eval123",
+    "role": "evaluator",
+    "department": "إدارة تميز الأعمال",
+    "assignedProjects": []
+  },
+  {
+    "id": "user_tech_001",
+    "email": "tech@elm.sa",
+    "name": "مقيم التقنية",
+    "password": "eval123",
+    "role": "evaluator",
+    "department": "إدارة التقنية",
+    "assignedProjects": []
+  },
+  {
+    "email": "mawaji@elm.sa",
+    "name": "منصور عواجي",
+    "password": "qs@2025",
+    "role": "evaluator",
+    "department": "إدارة تميز الأعمال",
+    "assignedProjects": [],
+    "id": "user_1765305002263",
+    "mustChangePassword": false
+  },
+  {
+    "email": "mghemlas@elm.sa",
+    "name": "مساعد الغملاس",
+    "password": "mghemlas@2025@2025",
+    "role": "evaluator",
+    "department": "إدارة تميز الأعمال",
+    "assignedProjects": [],
+    "id": "user_1765305052291"
+  },
+  {
+    "email": "mabomedra@elm.sa",
+    "name": "محمد أبومدره",
+    "password": "mabomedra@2025@2025",
+    "role": "evaluator",
+    "department": "إدارة تميز الأعمال",
+    "assignedProjects": [],
+    "id": "user_1765305091449"
+  },
+  {
+    "email": "mojqahtani@ek.com.sa",
+    "name": "معجب القحطاني",
+    "password": "mojqahtani@2025@2025",
+    "role": "evaluator",
+    "department": "إدارة تميز الأعمال",
+    "assignedProjects": [],
+    "id": "user_1765305167211"
+  }
+]

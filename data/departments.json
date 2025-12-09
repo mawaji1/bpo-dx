@@ -1,0 +1,26 @@
+[
+    {
+        "id": "dept_01",
+        "name": "التفتيش",
+        "nameEn": "Inspection",
+        "projectCount": 7
+    },
+    {
+        "id": "dept_02",
+        "name": "المشاريع المتخصصة",
+        "nameEn": "Specialized Projects",
+        "projectCount": 4
+    },
+    {
+        "id": "dept_03",
+        "name": "إسناد العمليات",
+        "nameEn": "Process Outsourcing",
+        "projectCount": 6
+    },
+    {
+        "id": "dept_04",
+        "name": "مراكز الاعمال",
+        "nameEn": "Business Centers",
+        "projectCount": 10
+    }
+]

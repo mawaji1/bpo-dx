@@ -1,0 +1,217 @@
+{
+    "pillars": [
+        {
+            "id": "strategic",
+            "name": "البعد الاستراتيجي",
+            "nameEn": "Strategic Dimension",
+            "description": "مدى ارتباط التحول الرقمي بتخطيط استراتيجي هادف",
+            "levels": [
+                {
+                    "level": 1,
+                    "name": "الأساس",
+                    "description": "مبادرات رقمية منفصلة بدون خطة"
+                },
+                {
+                    "level": 2,
+                    "name": "النمو",
+                    "description": "وجود خطة غير مرتبطة بأهداف المشروع"
+                },
+                {
+                    "level": 3,
+                    "name": "النضج",
+                    "description": "خارطة طريق مرتبطة ببعض الأهداف"
+                },
+                {
+                    "level": 4,
+                    "name": "التميز",
+                    "description": "خطة متكاملة مع متابعة دورية"
+                },
+                {
+                    "level": 5,
+                    "name": "الريادة",
+                    "description": "توجه استراتيجي مستدام مع قياس الأثر"
+                }
+            ]
+        },
+        {
+            "id": "operations",
+            "name": "العمليات الرقمية",
+            "nameEn": "Digital Operations",
+            "description": "مدى أتمتة الإجراءات التشغيلية",
+            "levels": [
+                {
+                    "level": 1,
+                    "name": "الأساس",
+                    "description": "إجراءات يدوية ورقية"
+                },
+                {
+                    "level": 2,
+                    "name": "النمو",
+                    "description": "نماذج رقمية وأدوات محدودة"
+                },
+                {
+                    "level": 3,
+                    "name": "النضج",
+                    "description": "عمليات موحدة عبر الأنظمة"
+                },
+                {
+                    "level": 4,
+                    "name": "التميز",
+                    "description": "أتمتة متكاملة من طرف لطرف"
+                },
+                {
+                    "level": 5,
+                    "name": "الريادة",
+                    "description": "عمليات مدعومة بالذكاء الاصطناعي"
+                }
+            ]
+        },
+        {
+            "id": "technology",
+            "name": "التقنيات والأدوات",
+            "nameEn": "Technologies & Tools",
+            "description": "مستوى اعتماد التقنيات الحديثة",
+            "levels": [
+                {
+                    "level": 1,
+                    "name": "الأساس",
+                    "description": "أنظمة قديمة والاعتماد على الجداول"
+                },
+                {
+                    "level": 2,
+                    "name": "النمو",
+                    "description": "أدوات رقمية منفصلة وغير متكاملة"
+                },
+                {
+                    "level": 3,
+                    "name": "النضج",
+                    "description": "حلول متكاملة (ERP/CRM)"
+                },
+                {
+                    "level": 4,
+                    "name": "التميز",
+                    "description": "تقنيات سحابية وواجهات API"
+                },
+                {
+                    "level": 5,
+                    "name": "الريادة",
+                    "description": "منظومة ذكية مع AI وIoT"
+                }
+            ]
+        },
+        {
+            "id": "data",
+            "name": "البيانات والتحليلات",
+            "nameEn": "Data & Analytics",
+            "description": "جاهزية البيانات ودورها في صنع القرار",
+            "levels": [
+                {
+                    "level": 1,
+                    "name": "الأساس",
+                    "description": "بيانات مشتتة وغير متناسقة"
+                },
+                {
+                    "level": 2,
+                    "name": "النمو",
+                    "description": "مستودع بيانات مركزي"
+                },
+                {
+                    "level": 3,
+                    "name": "النضج",
+                    "description": "تقارير ولوحات متابعة أساسية"
+                },
+                {
+                    "level": 4,
+                    "name": "التميز",
+                    "description": "تحليلات تنبؤية ومؤشرات أداء"
+                },
+                {
+                    "level": 5,
+                    "name": "الريادة",
+                    "description": "تحليلات توجيهية مدعومة بالAI"
+                }
+            ]
+        },
+        {
+            "id": "customerExperience",
+            "name": "تجربة العملاء وأصحاب المصلحة",
+            "nameEn": "Customer Experience",
+            "description": "مستوى نضج تجربة المستفيدين",
+            "levels": [
+                {
+                    "level": 1,
+                    "name": "الأساس",
+                    "description": "تواصل يدوي وخدمات محدودة"
+                },
+                {
+                    "level": 2,
+                    "name": "النمو",
+                    "description": "قنوات رقمية منفصلة"
+                },
+                {
+                    "level": 3,
+                    "name": "النضج",
+                    "description": "خدمة متعددة القنوات"
+                },
+                {
+                    "level": 4,
+                    "name": "التميز",
+                    "description": "تخصيص الخدمة وبوابات ذاتية"
+                },
+                {
+                    "level": 5,
+                    "name": "الريادة",
+                    "description": "خدمة استباقية مع AI وchatbots"
+                }
+            ]
+        }
+    ],
+    "stages": [
+        {
+            "id": "pending",
+            "name": "في انتظار التقييم الذاتي",
+            "order": 0,
+            "color": "#94a3b8"
+        },
+        {
+            "id": "self_submitted",
+            "name": "تم التقييم الذاتي",
+            "order": 1,
+            "color": "#3b82f6"
+        },
+        {
+            "id": "under_review",
+            "name": "قيد المراجعة",
+            "order": 2,
+            "color": "#f59e0b"
+        },
+        {
+            "id": "committee_evaluated",
+            "name": "تم تقييم اللجنة",
+            "order": 3,
+            "color": "#8b5cf6"
+        },
+        {
+            "id": "summit_review",
+            "name": "مراجعة القمة",
+            "order": 4,
+            "color": "#ec4899"
+        },
+        {
+            "id": "finalized",
+            "name": "مكتمل",
+            "order": 5,
+            "color": "#22c55e"
+        }
+    ],
+    "evaluatorDepartments": [
+        {
+            "id": "business_excellence",
+            "name": "إدارة تميز الأعمال"
+        },
+        {
+            "id": "technology",
+            "name": "إدارة التقنية"
+        }
+    ]
+}

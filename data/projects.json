@@ -1,0 +1,218 @@
+[
+  {
+    "id": "proj_001",
+    "name": "صحة البيئة عسير",
+    "departmentId": "dept_01",
+    "programManager": "فهد العبدلي",
+    "city": "أبها",
+    "submissionId": null
+  },
+  {
+    "id": "proj_002",
+    "name": "صحة البيئة جدة",
+    "departmentId": "dept_01",
+    "programManager": "محمد خطاب",
+    "city": "جدة",
+    "submissionId": null
+  },
+  {
+    "id": "proj_003",
+    "name": "صحة البيئة المدينة",
+    "departmentId": "dept_01",
+    "programManager": "محمد خطاب",
+    "city": "المدينة المنورة",
+    "submissionId": null
+  },
+  {
+    "id": "proj_004",
+    "name": "صحة البيئة مكة",
+    "departmentId": "dept_01",
+    "programManager": "عبدالرحمن شقرون",
+    "city": "مكة المكرمة",
+    "submissionId": null
+  },
+  {
+    "id": "proj_005",
+    "name": "السفارات",
+    "departmentId": "dept_01",
+    "programManager": "يوسف العقيل",
+    "city": "الرياض",
+    "submissionId": null
+  },
+  {
+    "id": "proj_006",
+    "name": "صحة البيئة تبوك",
+    "departmentId": "dept_01",
+    "programManager": "يوسف العقيل",
+    "city": "تبوك",
+    "submissionId": null
+  },
+  {
+    "id": "proj_007",
+    "name": "مصادر المياه",
+    "departmentId": "dept_01",
+    "programManager": "محمد الظفيري",
+    "city": "الرياض",
+    "submissionId": null
+  },
+  {
+    "id": "proj_008",
+    "name": "الرقابة والتفتيش بالعلا",
+    "departmentId": "dept_02",
+    "programManager": "عبدالرحمن الحربي",
+    "city": "العلا",
+    "submissionId": null
+  },
+  {
+    "id": "proj_009",
+    "name": "مركز الخدمات الشامل بالعلا",
+    "departmentId": "dept_02",
+    "programManager": "عبدالرحمن الحربي",
+    "city": "العلا",
+    "submissionId": null
+  },
+  {
+    "id": "proj_010",
+    "name": "جدة التاريخية",
+    "departmentId": "dept_02",
+    "programManager": "نايف الشويش",
+    "city": "جدة",
+    "submissionId": "3a1df184-6203-0ad1-3444-1e5e73f67acc"
+  },
+  {
+    "id": "proj_011",
+    "name": "مدينة الامير سلطان العسكرية",
+    "departmentId": "dept_02",
+    "programManager": "بدر الحماد",
+    "city": "الرياض",
+    "submissionId": null
+  },
+  {
+    "id": "proj_012",
+    "name": "العقار",
+    "departmentId": "dept_03",
+    "programManager": "عوض العمري",
+    "city": "الرياض",
+    "submissionId": "3a1dc7fa-0b15-474b-c852-e41d3947788b"
+  },
+  {
+    "id": "proj_013",
+    "name": "قياس",
+    "departmentId": "dept_03",
+    "programManager": "مشعل الحمزة",
+    "city": "جدة",
+    "submissionId": "3a1dc86b-e8d3-b17a-4a6d-8ccd3cf85d27"
+  },
+  {
+    "id": "proj_014",
+    "name": "الباحث الاجتماعي",
+    "departmentId": "dept_03",
+    "programManager": "نايف ازيبي",
+    "city": "الرياض",
+    "submissionId": "3a1dc824-ddb2-7b5e-c79e-2ccdcd99255d"
+  },
+  {
+    "id": "proj_015",
+    "name": "مركز شمول",
+    "departmentId": "dept_03",
+    "programManager": "خالد المقحم",
+    "city": "الرياض",
+    "submissionId": "3a1de611-e6dc-e2cf-353e-0abceee33365"
+  },
+  {
+    "id": "proj_016",
+    "name": "الرقمنة",
+    "departmentId": "dept_03",
+    "programManager": "محمد الحقباني",
+    "city": "الرياض",
+    "submissionId": null
+  },
+  {
+    "id": "proj_017",
+    "name": "الولاية على القصر",
+    "departmentId": "dept_03",
+    "programManager": "محمد الحقباني",
+    "city": "الرياض",
+    "submissionId": "3a1dd79f-3ecf-9f0f-3629-4bf0dd0d0b73"
+  },
+  {
+    "id": "proj_018",
+    "name": "نسك مرحبا",
+    "departmentId": "dept_04",
+    "programManager": "أحمد الوهبي",
+    "city": "جدة",
+    "submissionId": null
+  },
+  {
+    "id": "proj_019",
+    "name": "اسك مي",
+    "departmentId": "dept_04",
+    "programManager": "أحمد الوهبي",
+    "city": "جدة",
+    "submissionId": null
+  },
+  {
+    "id": "proj_020",
+    "name": "البقيع",
+    "departmentId": "dept_04",
+    "programManager": "فهد الدعجاني",
+    "city": "المدينة المنورة",
+    "submissionId": null
+  },
+  {
+    "id": "proj_021",
+    "name": "مسجد قباء",
+    "departmentId": "dept_04",
+    "programManager": "فهد الدعجاني",
+    "city": "المدينة المنورة",
+    "submissionId": null
+  },
+  {
+    "id": "proj_022",
+    "name": "الميقات",
+    "departmentId": "dept_04",
+    "programManager": "فهد الدعجاني",
+    "city": "المدينة المنورة",
+    "submissionId": null
+  },
+  {
+    "id": "proj_023",
+    "name": "الروضة",
+    "departmentId": "dept_04",
+    "programManager": "فهد الدعجاني",
+    "city": "المدينة المنورة",
+    "submissionId": null
+  },
+  {
+    "id": "proj_024",
+    "name": "ناجز",
+    "departmentId": "dept_04",
+    "programManager": "عبدالرحمن المزيعل",
+    "city": "الرياض",
+    "submissionId": "3a1e106d-0e84-4b27-f874-8425cb96bdc4"
+  },
+  {
+    "id": "proj_025",
+    "name": "مراكز التراث",
+    "departmentId": "dept_04",
+    "programManager": "ناصر الدوسري",
+    "city": "الرياض",
+    "submissionId": null
+  },
+  {
+    "id": "proj_026",
+    "name": "برج الساعة",
+    "departmentId": "dept_04",
+    "programManager": "ناصر الدوسري",
+    "city": "مكة المكرمة",
+    "submissionId": null
+  },
+  {
+    "id": "proj_027",
+    "name": "بيوت الثقافة",
+    "departmentId": "dept_04",
+    "programManager": "مؤيد التوم",
+    "city": "الرياض",
+    "submissionId": null
+  }
+]
