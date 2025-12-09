@@ -1,6 +1,6 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { getUsers } from "@/lib/server-data";
+import { getUserByEmail, getUserById } from "@/lib/db";
 
 const handler = NextAuth({
     providers: [
@@ -15,12 +15,9 @@ const handler = NextAuth({
                     return null;
                 }
 
-                const users = getUsers();
-                const user = users.find(
-                    u => u.email === credentials.email && u.password === credentials.password
-                );
+                const user = await getUserByEmail(credentials.email);
 
-                if (user) {
+                if (user && user.password === credentials.password) {
                     return {
                         id: user.id,
                         email: user.email,
@@ -45,8 +42,7 @@ const handler = NextAuth({
 
             // Always check the latest mustChangePassword value from database
             if (token.sub) {
-                const users = getUsers();
-                const currentUser = users.find(u => u.id === token.sub);
+                const currentUser = await getUserById(token.sub);
                 if (currentUser) {
                     token.mustChangePassword = currentUser.mustChangePassword || false;
                 }

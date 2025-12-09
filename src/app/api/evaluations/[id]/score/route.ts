@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getEvaluations, saveEvaluations, getUsers } from '@/lib/server-data';
-import { getServerSession } from 'next-auth';
+import { getEvaluationById, updateEvaluation, getUsers } from '@/lib/db';
 
 interface Assessment {
     strategic: number;
@@ -32,26 +31,22 @@ export async function POST(
             return NextResponse.json({ error: 'evaluatorId and assessment required' }, { status: 400 });
         }
 
-        const evaluations = getEvaluations();
-        const users = getUsers();
-        const evalIndex = evaluations.findIndex(e => e.id === id);
-
-        if (evalIndex === -1) {
+        const evaluation = await getEvaluationById(id);
+        if (!evaluation) {
             return NextResponse.json({ error: 'Evaluation not found' }, { status: 404 });
         }
 
-        const evaluator = users.find(u => u.id === evaluatorId);
+        const users = await getUsers();
+        const evaluator = users.find((u: any) => u.id === evaluatorId);
         if (!evaluator) {
             return NextResponse.json({ error: 'Evaluator not found' }, { status: 404 });
         }
 
-        // Initialize evaluatorAssessments if not exists
-        if (!evaluations[evalIndex].evaluatorAssessments) {
-            evaluations[evalIndex].evaluatorAssessments = [];
-        }
+        // Get existing evaluator assessments or initialize
+        const evaluatorAssessments: EvaluatorAssessment[] = (evaluation.evaluatorScores as EvaluatorAssessment[]) || [];
 
         // Find existing assessment from this evaluator or add new
-        const existingIdx = evaluations[evalIndex].evaluatorAssessments.findIndex(
+        const existingIdx = evaluatorAssessments.findIndex(
             (ea: EvaluatorAssessment) => ea.evaluatorId === evaluatorId
         );
 
@@ -64,14 +59,14 @@ export async function POST(
         };
 
         if (existingIdx !== -1) {
-            evaluations[evalIndex].evaluatorAssessments[existingIdx] = newAssessment;
+            evaluatorAssessments[existingIdx] = newAssessment;
         } else {
-            evaluations[evalIndex].evaluatorAssessments.push(newAssessment);
+            evaluatorAssessments.push(newAssessment);
         }
 
         // Calculate average (committeeAssessment = average of all evaluator scores)
-        const allAssessments = evaluations[evalIndex].evaluatorAssessments as EvaluatorAssessment[];
-        if (allAssessments.length > 0) {
+        let committeeAssessment: Assessment | null = null;
+        if (evaluatorAssessments.length > 0) {
             const avgAssessment: Assessment = {
                 strategic: 0,
                 operations: 0,
@@ -80,7 +75,7 @@ export async function POST(
                 customerExperience: 0
             };
 
-            allAssessments.forEach((ea: EvaluatorAssessment) => {
+            evaluatorAssessments.forEach((ea: EvaluatorAssessment) => {
                 avgAssessment.strategic += ea.assessment.strategic;
                 avgAssessment.operations += ea.assessment.operations;
                 avgAssessment.technology += ea.assessment.technology;
@@ -88,23 +83,23 @@ export async function POST(
                 avgAssessment.customerExperience += ea.assessment.customerExperience;
             });
 
-            const count = allAssessments.length;
+            const count = evaluatorAssessments.length;
             avgAssessment.strategic = Math.round((avgAssessment.strategic / count) * 10) / 10;
             avgAssessment.operations = Math.round((avgAssessment.operations / count) * 10) / 10;
             avgAssessment.technology = Math.round((avgAssessment.technology / count) * 10) / 10;
             avgAssessment.data = Math.round((avgAssessment.data / count) * 10) / 10;
             avgAssessment.customerExperience = Math.round((avgAssessment.customerExperience / count) * 10) / 10;
 
-            evaluations[evalIndex].committeeAssessment = avgAssessment;
+            committeeAssessment = avgAssessment;
         }
 
-        // Update stage
-        evaluations[evalIndex].stage = 'under_review';
-        evaluations[evalIndex].updatedAt = new Date().toISOString();
+        const updated = await updateEvaluation(id, {
+            evaluatorScores: evaluatorAssessments,
+            committeeAssessment,
+            stage: 'under_review',
+        });
 
-        saveEvaluations(evaluations);
-
-        return NextResponse.json(evaluations[evalIndex]);
+        return NextResponse.json(updated);
     } catch (error) {
         console.error('Error submitting score:', error);
         return NextResponse.json({ error: 'Failed to submit score' }, { status: 500 });

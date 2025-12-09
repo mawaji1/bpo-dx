@@ -323,7 +323,7 @@ export default function OnboardingPage() {
                             <div className="flex gap-3 pt-4">
                                 <button
                                     onClick={handleCreateAndMap}
-                                    disabled={!newProject.name || mapping}
+                                    disabled={!newProject.name || !!mapping}
                                     className="btn btn-primary flex-1"
                                 >
                                     {mapping ? <Loader2 size={16} className="animate-spin" /> : <Plus size={16} />}

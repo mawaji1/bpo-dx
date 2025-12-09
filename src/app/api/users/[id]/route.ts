@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { updateUser, deleteUser, getUsers } from '@/lib/server-data';
+import { updateUser, deleteUser, getUserById } from '@/lib/db';
 
 interface RouteParams {
     params: Promise<{ id: string }>;
@@ -9,8 +9,7 @@ interface RouteParams {
 export async function GET(request: NextRequest, { params }: RouteParams) {
     try {
         const { id } = await params;
-        const users = getUsers();
-        const user = users.find(u => u.id === id);
+        const user = await getUserById(id);
 
         if (!user) {
             return NextResponse.json({ error: 'User not found' }, { status: 404 });
@@ -19,6 +18,7 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
         const { password, ...safeUser } = user;
         return NextResponse.json(safeUser);
     } catch (error) {
+        console.error('Error fetching user:', error);
         return NextResponse.json({ error: 'Failed to fetch user' }, { status: 500 });
     }
 }
@@ -29,7 +29,7 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
         const { id } = await params;
         const body = await request.json();
 
-        const updated = updateUser(id, body);
+        const updated = await updateUser(id, body);
         if (!updated) {
             return NextResponse.json({ error: 'User not found' }, { status: 404 });
         }
@@ -37,6 +37,7 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
         const { password, ...safeUser } = updated;
         return NextResponse.json(safeUser);
     } catch (error) {
+        console.error('Error updating user:', error);
         return NextResponse.json({ error: 'Failed to update user' }, { status: 500 });
     }
 }
@@ -46,13 +47,10 @@ export async function DELETE(request: NextRequest, { params }: RouteParams) {
     try {
         const { id } = await params;
 
-        const deleted = deleteUser(id);
-        if (!deleted) {
-            return NextResponse.json({ error: 'User not found' }, { status: 404 });
-        }
-
+        await deleteUser(id);
         return NextResponse.json({ success: true });
     } catch (error) {
+        console.error('Error deleting user:', error);
         return NextResponse.json({ error: 'Failed to delete user' }, { status: 500 });
     }
 }

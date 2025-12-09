@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getProjects, getEvaluations } from '@/lib/server-data';
+import { getProjects, getEvaluations } from '@/lib/db';
 import fs from 'fs';
 import path from 'path';
 
@@ -77,13 +77,12 @@ export async function GET() {
         // Fetch from elmiyaar API (with fallback to saved file)
         const elmiyaarResults = await fetchFromElmiyaar();
 
-        const projects = getProjects();
-        const evaluations = getEvaluations();
+        const projects = await getProjects();
+        const evaluations = await getEvaluations();
 
         // Get list of submission IDs that are already mapped
         const mappedSubmissionIds = new Set([
-            ...projects.filter(p => p.submissionId).map(p => p.submissionId),
-            ...evaluations.map(e => e.submissionId)
+            ...projects.filter((p: any) => p.submissionId).map((p: any) => p.submissionId),
         ]);
 
         // Parse and return submissions with mapped status

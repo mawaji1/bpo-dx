@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getProjects, saveProjects, getEvaluations, saveEvaluations } from '@/lib/server-data';
-import type { Project, Evaluation } from '@/lib/server-data';
+import { getProjects, createProject, getEvaluationByProjectId, updateEvaluation, updateProject } from '@/lib/db';
+import { prisma } from '@/lib/prisma';
 
 // POST /api/projects/map - map a submission to a project or create new project
 export async function POST(request: NextRequest) {
@@ -12,59 +12,47 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ error: 'Submission ID required' }, { status: 400 });
         }
 
-        const projects = getProjects();
-        const evaluations = getEvaluations();
-
-        let targetProject: Project;
+        let targetProject: any;
 
         if (createNew && newProjectData) {
-            // Create new project
-            const newProject: Project = {
-                id: `proj_${Date.now()}`,
+            // Create new project (also creates evaluation)
+            targetProject = await createProject({
                 name: newProjectData.name,
                 departmentId: newProjectData.departmentId || 'dept_01',
                 programManager: newProjectData.programManager || '',
                 city: newProjectData.city || 'الرياض',
                 submissionId: submissionId
-            };
-            projects.push(newProject);
-            saveProjects(projects);
-            targetProject = newProject;
+            });
+
+            // Update evaluation with self assessment if scores provided
+            if (submissionScores) {
+                const evaluation = await getEvaluationByProjectId(targetProject.id);
+                if (evaluation) {
+                    await updateEvaluation(evaluation.id, {
+                        selfAssessment: submissionScores,
+                        stage: 'self_submitted'
+                    });
+                }
+            }
         } else if (projectId) {
             // Map to existing project
-            const projectIndex = projects.findIndex(p => p.id === projectId);
-            if (projectIndex === -1) {
+            targetProject = await updateProject(projectId, { submissionId });
+            if (!targetProject) {
                 return NextResponse.json({ error: 'Project not found' }, { status: 404 });
             }
-            projects[projectIndex].submissionId = submissionId;
-            saveProjects(projects);
-            targetProject = projects[projectIndex];
+
+            // Update evaluation with self assessment if scores provided
+            if (submissionScores) {
+                const evaluation = await getEvaluationByProjectId(projectId);
+                if (evaluation) {
+                    await updateEvaluation(evaluation.id, {
+                        selfAssessment: submissionScores,
+                        stage: 'self_submitted'
+                    });
+                }
+            }
         } else {
             return NextResponse.json({ error: 'Either projectId or createNew required' }, { status: 400 });
-        }
-
-        // Create evaluation for this project if scores provided
-        if (submissionScores) {
-            const existingEval = evaluations.find(e => e.projectId === targetProject.id);
-            if (!existingEval) {
-                const newEvaluation: Evaluation = {
-                    id: `eval_${Date.now()}`,
-                    projectId: targetProject.id,
-                    submissionId: submissionId,
-                    selfAssessment: submissionScores,
-                    committeeAssessment: null,
-                    finalAssessment: null,
-                    stage: 'self_submitted',
-                    assignedEvaluators: [],
-                    meetingDate: null,
-                    meetingNotes: '',
-                    llmRoadmap: null,
-                    createdAt: new Date().toISOString(),
-                    updatedAt: null
-                };
-                evaluations.push(newEvaluation);
-                saveEvaluations(evaluations);
-            }
         }
 
         return NextResponse.json({

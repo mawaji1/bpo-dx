@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getUsers } from '@/lib/server-data';
+import { getUserById } from '@/lib/db';
 
 // GET /api/users/check-password-change?userId=xxx
 export async function GET(request: NextRequest) {
@@ -9,8 +9,7 @@ export async function GET(request: NextRequest) {
         return NextResponse.json({ mustChangePassword: false });
     }
 
-    const users = getUsers();
-    const user = users.find(u => u.id === userId);
+    const user = await getUserById(userId);
 
     return NextResponse.json({
         mustChangePassword: user?.mustChangePassword || false

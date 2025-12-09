@@ -1,11 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getProjects, saveProjects } from '@/lib/server-data';
+import { getProjects, createProject } from '@/lib/db';
 
 export async function GET() {
     try {
-        const projects = getProjects();
+        const projects = await getProjects();
         return NextResponse.json(projects);
     } catch (error) {
+        console.error('Error fetching projects:', error);
         return NextResponse.json({ error: 'Failed to fetch projects' }, { status: 500 });
     }
 }
@@ -22,27 +23,22 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        const projects = getProjects();
+        const projects = await getProjects();
 
         // Check for duplicate name
-        if (projects.some(p => p.name === name)) {
+        if (projects.some((p: any) => p.name === name)) {
             return NextResponse.json(
                 { error: 'مشروع بهذا الاسم موجود مسبقاً' },
                 { status: 400 }
             );
         }
 
-        const newProject = {
-            id: `proj_${Date.now()}`,
+        const newProject = await createProject({
             name,
             departmentId,
             programManager: programManager || '',
             city: city || 'الرياض',
-            submissionId: null
-        };
-
-        projects.push(newProject);
-        saveProjects(projects);
+        });
 
         return NextResponse.json(newProject, { status: 201 });
     } catch (error) {

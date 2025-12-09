@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth';
-import { getEvaluations, getProjects, getDepartments } from '@/lib/server-data';
+import { getEvaluations, getProjects, getDepartments } from '@/lib/db';
 
 // GET /api/evaluator/context - Get evaluator's assigned projects and related data
 export async function GET(request: NextRequest) {
@@ -12,28 +11,28 @@ export async function GET(request: NextRequest) {
             return NextResponse.json({ error: 'User ID required' }, { status: 400 });
         }
 
-        const evaluations = getEvaluations();
-        const projects = getProjects();
-        const departments = getDepartments();
+        const evaluations = await getEvaluations();
+        const projects = await getProjects();
+        const departments = await getDepartments();
 
         // Find evaluations assigned to this evaluator
-        const assignedEvaluations = evaluations.filter(e =>
+        const assignedEvaluations = evaluations.filter((e: any) =>
             e.assignedEvaluators?.includes(userId)
         );
 
         // Get the project IDs
-        const assignedProjectIds = assignedEvaluations.map(e => e.projectId);
+        const assignedProjectIds = assignedEvaluations.map((e: any) => e.projectId);
 
         // Get the projects
-        const assignedProjects = projects.filter(p =>
+        const assignedProjects = projects.filter((p: any) =>
             assignedProjectIds.includes(p.id)
         );
 
         // Get relevant department IDs
-        const relevantDepartmentIds = [...new Set(assignedProjects.map(p => p.departmentId))];
+        const relevantDepartmentIds = [...new Set(assignedProjects.map((p: any) => p.departmentId))];
 
         // Get relevant departments
-        const relevantDepartments = departments.filter(d =>
+        const relevantDepartments = departments.filter((d: any) =>
             relevantDepartmentIds.includes(d.id)
         );
 

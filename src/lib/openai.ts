@@ -1,8 +1,15 @@
 import OpenAI from 'openai';
 
-const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
-});
+let openaiClient: OpenAI | null = null;
+
+function getOpenAI(): OpenAI {
+    if (!openaiClient) {
+        openaiClient = new OpenAI({
+            apiKey: process.env.OPENAI_API_KEY,
+        });
+    }
+    return openaiClient;
+}
 
 interface Assessment {
     strategic: number;
@@ -111,7 +118,7 @@ ${weakestPillars.map((p, i) => `${i + 1}. ${p.name} (${p.score}/5)`).join('\n')}
 
 اكتب بصيغة Markdown واجعل التوصيات محددة وقابلة للتنفيذ.`;
 
-    const response = await openai.chat.completions.create({
+    const response = await getOpenAI().chat.completions.create({
         model: 'gpt-4o',
         messages: [
             {
@@ -145,7 +152,7 @@ export async function generatePillarRecommendation(
 
 اكتب التوصيات بشكل مختصر ومباشر.`;
 
-    const response = await openai.chat.completions.create({
+    const response = await getOpenAI().chat.completions.create({
         model: 'gpt-4o',
         messages: [
             { role: 'user', content: prompt }

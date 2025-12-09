@@ -1,0 +1,83 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+}
+
+model User {
+  id                 String   @id @default(cuid())
+  email              String   @unique
+  name               String
+  password           String
+  role               String   @default("evaluator")
+  department         String?
+  mustChangePassword Boolean  @default(true)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+model Department {
+  id        String    @id @default(cuid())
+  name      String    @unique
+  projects  Project[]
+  createdAt DateTime  @default(now())
+}
+
+model Project {
+  id             String      @id @default(cuid())
+  name           String
+  departmentId   String
+  department     Department  @relation(fields: [departmentId], references: [id])
+  programManager String
+  city           String      @default("الرياض")
+  submissionId   String?
+  evaluation     Evaluation?
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+}
+
+model Evaluation {
+  id                 String   @id @default(cuid())
+  projectId          String   @unique
+  project            Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  stage              String   @default("pending")
+  assignedEvaluators String[] @default([])
+  meetingDate        String?
+  
+  // Self Assessment Scores
+  selfStrategic          Float @default(0)
+  selfOperations         Float @default(0)
+  selfTechnology         Float @default(0)
+  selfData               Float @default(0)
+  selfCustomerExperience Float @default(0)
+  
+  // Committee Assessment Scores (average of evaluators)
+  committeeStrategic          Float?
+  committeeOperations         Float?
+  committeeTechnology         Float?
+  committeeData               Float?
+  committeeCustomerExperience Float?
+  
+  // Final Assessment Scores (calibrated)
+  finalStrategic          Float?
+  finalOperations         Float?
+  finalTechnology         Float?
+  finalData               Float?
+  finalCustomerExperience Float?
+  
+  // Individual evaluator scores stored as JSON
+  evaluatorScores Json?
+  
+  // Comments
+  evaluatorComments Json?
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Config {
+  id    String @id @default("default")
+  data  Json
+}
